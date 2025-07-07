@@ -1,90 +1,209 @@
-# Bibliotheca - Curated Literary Collection
+# Sweet Delights Bakery
 
-An elegant and sophisticated online bookstore built with React, TypeScript, and Tailwind CSS. Bibliotheca offers a premium shopping experience for book enthusiasts, featuring a carefully curated collection of literary works.
+A modern, responsive website for selling baked goods with a Java Spring Boot backend and vanilla JavaScript frontend.
 
 ## Features
 
-- **Elegant Design**: Premium, sophisticated interface with attention to detail
-- **Responsive Layout**: Optimized for all devices and screen sizes
-- **Advanced Filtering**: Search and filter books by category
-- **Shopping Cart**: Full cart functionality with quantity management
-- **Secure Checkout**: Multi-step checkout process with customer and payment information
-- **Modern UI**: Beautiful animations, hover effects, and micro-interactions
-- **TypeScript**: Full type safety throughout the application
+### Frontend (JavaScript)
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+- **Product Catalog**: Display of bakery items with images, descriptions, and prices
+- **Shopping Cart**: Add/remove items, update quantities, persistent cart storage
+- **Checkout Process**: Customer information and payment form
+- **Order Confirmation**: Success page with order ID
+- **Modern UI**: Clean, bakery-themed design with smooth animations
+
+### Backend (Java Spring Boot)
+- **RESTful API**: Clean API endpoints for order management
+- **Order Processing**: Complete order lifecycle management
+- **Database Integration**: H2 in-memory database for development
+- **CORS Support**: Configured for frontend integration
+- **Error Handling**: Comprehensive error handling and validation
 
 ## Tech Stack
 
-- **React 18** with TypeScript
-- **Tailwind CSS** for styling
-- **Lucide React** for icons
-- **Vite** for development and building
-- **Local Storage** for cart persistence
+### Frontend
+- **HTML5**: Semantic markup
+- **CSS3**: Modern styling with Flexbox and Grid
+- **Vanilla JavaScript**: No frameworks, pure JS for maximum performance
+- **Local Storage**: Cart persistence across sessions
+
+### Backend
+- **Java 11+**: Modern Java features
+- **Spring Boot 2.7**: Rapid application development
+- **Spring Data JPA**: Database abstraction layer
+- **H2 Database**: In-memory database for development
+- **Maven**: Dependency management and build tool
 
 ## Getting Started
 
-1. Clone the repository
-2. Install dependencies:
+### Frontend Setup
+1. Open `index.html` in a web browser
+2. The frontend will work standalone with mock data
+3. For full functionality, start the Java backend
+
+### Backend Setup
+1. Ensure Java 11+ is installed
+2. Navigate to the `java-backend` directory
+3. Run the application:
    ```bash
-   npm install
+   mvn spring-boot:run
    ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+4. The API will be available at `http://localhost:8080`
+
+### Database Access
+- H2 Console: `http://localhost:8080/h2-console`
+- JDBC URL: `jdbc:h2:mem:bakery`
+- Username: `sa`
+- Password: (empty)
+
+## API Endpoints
+
+### Orders
+- `POST /api/orders` - Create a new order
+- `GET /api/orders` - Get all orders
+- `GET /api/orders/{orderId}` - Get specific order
+- `PUT /api/orders/{orderId}/status` - Update order status
+
+### Example Order Request
+```json
+{
+  "customer": {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "555-1234",
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "zip": "12345"
+    }
+  },
+  "items": [
+    {
+      "id": 1,
+      "name": "Chocolate Croissant",
+      "price": 4.50,
+      "quantity": 2
+    }
+  ],
+  "total": 9.00,
+  "payment": {
+    "cardNumber": "1234567890123456",
+    "expiryDate": "12/25",
+    "cvv": "123"
+  }
+}
+```
 
 ## Project Structure
 
 ```
-src/
-├── components/          # React components
-│   ├── BookCard.tsx    # Individual book display
-│   ├── Cart.tsx        # Shopping cart sidebar
-│   └── Checkout.tsx    # Checkout process
-├── data/               # Static data
-│   └── books.ts        # Book catalog
-├── hooks/              # Custom React hooks
-│   └── useCart.ts      # Cart management logic
-├── types/              # TypeScript type definitions
-│   └── index.ts        # Shared interfaces
-└── App.tsx             # Main application component
+sweet-delights-bakery/
+├── index.html              # Main HTML file
+├── styles.css              # CSS styles
+├── script.js               # JavaScript functionality
+├── java-backend/           # Java Spring Boot backend
+│   ├── src/main/java/
+│   │   └── com/sweetdelights/bakery/
+│   │       ├── BakeryApplication.java
+│   │       ├── controller/
+│   │       │   └── OrderController.java
+│   │       ├── model/
+│   │       │   ├── Order.java
+│   │       │   └── OrderItem.java
+│   │       ├── repository/
+│   │       │   └── OrderRepository.java
+│   │       └── service/
+│   │           └── OrderService.java
+│   ├── src/main/resources/
+│   │   └── application.properties
+│   └── pom.xml
+└── README.md
 ```
 
 ## Features in Detail
 
-### Book Catalog
-- Curated collection of literary works
-- High-quality book covers and descriptions
-- Rating and review system
+### Product Management
+- 8 sample bakery products with descriptions and prices
+- Emoji-based product images for visual appeal
 - Category-based organization
-- Stock status tracking
 
-### Shopping Experience
-- Intuitive add-to-cart functionality
-- Real-time cart updates
-- Quantity management
-- Price calculations with discounts
-- Persistent cart across sessions
+### Shopping Cart
+- Add/remove items with quantity controls
+- Real-time price calculations
+- Persistent storage using localStorage
+- Visual feedback for user actions
 
-### Checkout Process
-- Two-step checkout flow
+### Order Processing
+- Two-step checkout process
 - Customer information collection
-- Secure payment form
-- Order confirmation
-- Responsive design
+- Payment form with validation
+- Order confirmation with unique ID
 
-## Design Philosophy
+### Responsive Design
+- Mobile-first approach
+- Flexible grid layouts
+- Touch-friendly interface
+- Optimized for all screen sizes
 
-Bibliotheca embodies elegance and sophistication in every detail:
-- **Typography**: Serif fonts for headings to evoke literary tradition
-- **Color Palette**: Warm amber and slate tones for a premium feel
-- **Interactions**: Smooth animations and hover effects
-- **Layout**: Clean, spacious design with thoughtful white space
-- **Accessibility**: High contrast ratios and semantic HTML
+## Customization
 
-## Contributing
+### Adding New Products
+Edit the `products` array in `script.js`:
+```javascript
+{
+    id: 9,
+    name: "New Product",
+    description: "Product description",
+    price: 5.99,
+    emoji: "🥧"
+}
+```
 
-This project showcases modern React development practices and can serve as a template for e-commerce applications. Feel free to use it as a starting point for your own projects.
+### Styling Changes
+Modify `styles.css` to customize:
+- Color scheme (currently brown/orange bakery theme)
+- Typography (Georgia serif font)
+- Layout and spacing
+- Animations and transitions
+
+### Backend Configuration
+Update `application.properties` for:
+- Database settings
+- Server port
+- CORS configuration
+- Logging levels
+
+## Production Deployment
+
+### Frontend
+- Deploy static files to any web server
+- Configure API endpoint URL in `script.js`
+- Enable HTTPS for secure payment processing
+
+### Backend
+- Package as JAR: `mvn clean package`
+- Deploy to cloud platforms (AWS, Heroku, etc.)
+- Configure production database (PostgreSQL, MySQL)
+- Set up environment variables for sensitive data
+
+## Security Considerations
+
+- **Payment Processing**: Integrate with secure payment providers (Stripe, PayPal)
+- **Data Validation**: Server-side validation for all inputs
+- **HTTPS**: Enable SSL/TLS for production
+- **Authentication**: Add user authentication for order tracking
+- **Rate Limiting**: Implement API rate limiting
+
+## Future Enhancements
+
+- User authentication and order history
+- Real-time order tracking
+- Email notifications
+- Inventory management
+- Admin dashboard
+- Payment gateway integration
+- Mobile app development
 
 ## License
 
-MIT License - feel free to use this project for personal or commercial purposes.
+This project is open source and available under the MIT License.
