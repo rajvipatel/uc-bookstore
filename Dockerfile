@@ -1,20 +1,27 @@
 # Use Node.js official image as base
-FROM node:18-alpine as build
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build
+
+
+#FROM node:18-alpine as build
 
 # Set working directory
-WORKDIR /app
+#WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+#COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+#RUN npm ci --only=production
 
 # Copy source code
-COPY . .
+#COPY . .
 
 # Build the application
-RUN npm run build
+#RUN npm run build
 
 # Use nginx to serve the built app
 FROM nginx:alpine
