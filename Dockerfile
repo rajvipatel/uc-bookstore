@@ -1,5 +1,5 @@
 # Use Node.js official image as base
-FROM node:18-alpine
+FROM node:18-alpine as build
 WORKDIR /app
 COPY . .
 RUN npm install
